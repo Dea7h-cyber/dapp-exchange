@@ -6,10 +6,10 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
-
+  
   * {
-    font-family: Inter;
     box-sizing: border-box;
+    font-family: Inter;
   }
 
   input {
@@ -20,7 +20,7 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     &[type=number] {
-    -moz-appearance: textfield;
+      -moz-appearance: textfield;
     }
   }
 `

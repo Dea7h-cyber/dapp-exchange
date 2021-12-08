@@ -35,8 +35,9 @@ export interface Fund {
 export interface ExchangeState {
   loading: boolean
   coins: Coin[] | null
-  wallet: {
-    address: string | null
+  account: {
+    addresses: string[] | null
+    connecting: boolean
     funds: Coin[] | null
   }
   swap: {

@@ -16,8 +16,8 @@ export const DropdownOptions: React.FC<Props> = ({ action, onClick }) => {
   const exchange = useAppSelector((state) => state.exchange)
 
   const coins = useMemo(
-    () => (action === 'from' ? exchange.wallet.funds! : exchange.coins!),
-    [action, exchange.wallet.funds, exchange.coins],
+    () => (action === 'from' ? exchange.account.funds! : exchange.coins!),
+    [action, exchange.account.funds, exchange.coins],
   )
 
   const handleCoinSelect = (coin: Coin) => {

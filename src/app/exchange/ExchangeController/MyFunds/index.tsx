@@ -5,7 +5,7 @@ import { FundsWrapper, Title } from './styles'
 
 export const MyFunds = () => {
   const dispatch = useAppDispatch()
-  const funds = useAppSelector((state) => state.exchange.wallet.funds)
+  const funds = useAppSelector((state) => state.exchange.account.funds)
 
   const handleClick = (coin: Coin) => {
     dispatch(setSwapCoin({ swapFrom: true, coin }))

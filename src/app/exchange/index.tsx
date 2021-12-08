@@ -8,11 +8,11 @@ import { ExchangeController } from './ExchangeController'
 
 export const Exchange = () => {
   const dispatch = useAppDispatch()
-  const walletConnected = useAppSelector((state) => state.exchange.wallet.address)
+  const accountAddresses = useAppSelector((state) => state.exchange.account.addresses)
 
   useEffect(() => {
     dispatch(fetchCoins())
   }, [dispatch])
 
-  return <ExchangeWrapper>{!walletConnected ? <ConnectWallet /> : <ExchangeController />}</ExchangeWrapper>
+  return <ExchangeWrapper>{!accountAddresses ? <ConnectWallet /> : <ExchangeController />}</ExchangeWrapper>
 }

@@ -8,6 +8,10 @@ export const SwapWrapper = styled.div`
     0px 9px 28px 8px rgba(0, 0, 0, 0.05);
   border-radius: 12px;
   padding: 24px;
+
+  @media (max-width: 800px) {
+    order: 1;
+  }
 `
 
 export const Title = styled.div`

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import { useAppDispatch, useAppSelector } from 'store'
 import { setSwapAmount, setSwapAmountMax, setSwapScreen, reverseSwapCoins } from 'store/exchange'
@@ -14,8 +14,10 @@ export const Swap = () => {
   const [dropdownOptions, setDropdown] = useState<null | 'from' | 'to'>(null)
 
   // Calculate how many tokens we will get
-  const calculateAcquiringFundValue =
-    (exchange.swap.from.amount * exchange.swap.from.coin!.current_price) / exchange.swap.to.coin!.current_price
+  const calculateSwapToken = useMemo(() => {
+    if (!exchange.swap.from.amount || !exchange.swap.from.coin || !exchange.swap.to.coin) return 0
+    return (exchange.swap.from.amount * exchange.swap.from.coin.current_price) / exchange.swap.to.coin.current_price
+  }, [exchange.swap.from, exchange.swap.to.coin])
 
   const setFromValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const amount = Number(e.target.value) || 0
@@ -43,7 +45,7 @@ export const Swap = () => {
 
         <Dropdown
           title='To'
-          value={calculateAcquiringFundValue}
+          value={calculateSwapToken}
           coin={exchange.swap.to.coin}
           onClickDropdown={() => setDropdown('to')}
         />

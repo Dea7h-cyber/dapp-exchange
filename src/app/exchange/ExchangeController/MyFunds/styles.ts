@@ -3,7 +3,12 @@ import styled from 'styled-components'
 export const FundsWrapper = styled.div`
   width: 100%;
   max-width: 570px;
-  margin-right: 10px;
+  margin-right: 30px;
+
+  @media (max-width: 800px) {
+    margin: 50px 0 30px 0;
+    order: 2;
+  }
 `
 
 export const Title = styled.div`

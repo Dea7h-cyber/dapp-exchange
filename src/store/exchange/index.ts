@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Coin, ExchangeState, Fund } from './typings'
-import { fetchCoins } from './actions'
+import { accountConnect, accountCheckIfConnected, fetchCoins } from './actions'
 
 const defaultFunds: Fund[] = [
   { symbol: 'btc', balance: 3.421235665543423423 },
@@ -13,8 +13,9 @@ const defaultFunds: Fund[] = [
 const initialState: ExchangeState = {
   loading: true,
   coins: null,
-  wallet: {
-    address: null,
+  account: {
+    addresses: null,
+    connecting: false,
     funds: null,
   },
   swap: {
@@ -34,10 +35,6 @@ export const exchangeSlice = createSlice({
   initialState,
 
   reducers: {
-    setWalletAddress: (state) => {
-      state.wallet.address = 'walletAddress'
-    },
-
     reverseSwapCoins: (state) => {
       const fromCoin = state.swap.from.coin
       state.swap.from.coin = state.swap.to.coin
@@ -98,7 +95,7 @@ export const exchangeSlice = createSlice({
           (a.balanceUSD || b.balanceUSD ? a.balanceUSD > b.balanceUSD : a.market_cap > b.market_cap) ? -1 : 1,
         )
 
-      state.wallet.funds = state.coins
+      state.account.funds = state.coins
         .filter((coin) => coin.balance > 0 || defaultFunds.find((fund) => fund.symbol === coin.symbol))
         .sort((a, b) => (a.balanceUSD > b.balanceUSD ? -1 : 1))
 
@@ -109,6 +106,28 @@ export const exchangeSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
+      .addCase(accountCheckIfConnected.pending, (state) => {
+        state.account.connecting = true
+      })
+      .addCase(accountCheckIfConnected.rejected, (state) => {
+        state.account.connecting = false
+      })
+      .addCase(accountCheckIfConnected.fulfilled, (state, { payload }) => {
+        state.account.connecting = false
+        state.account.addresses = payload.length ? payload : null
+      })
+
+      .addCase(accountConnect.pending, (state) => {
+        state.account.connecting = true
+      })
+      .addCase(accountConnect.rejected, (state) => {
+        state.account.connecting = false
+      })
+      .addCase(accountConnect.fulfilled, (state, { payload }) => {
+        state.account.addresses = payload
+        state.account.connecting = false
+      })
+
       .addCase(fetchCoins.pending, (state) => {
         state.loading = true
       })
@@ -132,7 +151,7 @@ export const exchangeSlice = createSlice({
             (a.balanceUSD || b.balanceUSD ? a.balanceUSD > b.balanceUSD : a.market_cap > b.market_cap) ? -1 : 1,
           )
 
-        state.wallet.funds = defaultFunds
+        state.account.funds = defaultFunds
           .map((fund) => {
             const coin = action.payload.find((coin) => coin.symbol === fund.symbol)
             if (!coin) return null
@@ -146,21 +165,14 @@ export const exchangeSlice = createSlice({
           .filter(Boolean)
           .sort((a, b) => ((a?.balanceUSD || 0) > (b?.balanceUSD || 0) ? -1 : 1)) as Coin[]
 
-        state.swap.from.coin = state.wallet.funds.find((fund) => fund.symbol === 'btc')!
+        state.swap.from.coin = state.account.funds.find((fund) => fund.symbol === 'btc')!
         state.swap.to.coin = state.coins.find((coin) => coin.symbol === 'eth')!
       })
   },
 })
 
-export const {
-  setWalletAddress,
-  setSwapAmount,
-  setSwapCoin,
-  setSwapAmountMax,
-  setSwapScreen,
-  confirmSwap,
-  reverseSwapCoins,
-} = exchangeSlice.actions
+export const { setSwapAmount, setSwapCoin, setSwapAmountMax, setSwapScreen, confirmSwap, reverseSwapCoins } =
+  exchangeSlice.actions
 
 export default exchangeSlice.reducer
 export * from './typings'

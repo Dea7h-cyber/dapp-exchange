@@ -57,7 +57,7 @@ export const Confirm = () => {
       setScreen(nextScreen)
       setDisabled(false)
       if (nextScreen === SCREENS.SUCCESS) dispatch(confirmSwap())
-    }, 2000)
+    }, 1000)
   }
 
   const handleGoBack = () => {

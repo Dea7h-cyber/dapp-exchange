@@ -1,1 +1,1 @@
-# DAPP - Decentralized Crypto Exchange
+# DAPP - Crypto Exchange

@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
-import '@fontsource/inter'
+import '@fontsource/roboto'
 
 export const GlobalStyles = createGlobalStyle`
   body, html {
@@ -9,7 +9,7 @@ export const GlobalStyles = createGlobalStyle`
   
   * {
     box-sizing: border-box;
-    font-family: Inter;
+    font-family: Roboto;
   }
 
   input {

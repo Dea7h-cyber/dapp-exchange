@@ -99,8 +99,8 @@ export const exchangeSlice = createSlice({
         .filter((coin) => coin.balance > 0 || defaultFunds.find((fund) => fund.symbol === coin.symbol))
         .sort((a, b) => (a.balanceUSD > b.balanceUSD ? -1 : 1))
 
-      state.swap.from.coin = state.coins.find((coin) => coin.symbol === state.swap.from.coin?.symbol)!
-      state.swap.to.coin = state.coins.find((coin) => coin.symbol === state.swap.to.coin?.symbol)!
+      state.swap.from.coin = state.coins.find((coin) => coin.symbol === state.swap.from.coin!.symbol)!
+      state.swap.to.coin = state.coins.find((coin) => coin.symbol === state.swap.to.coin!.symbol)!
     },
   },
 
@@ -130,9 +130,6 @@ export const exchangeSlice = createSlice({
 
       .addCase(fetchCoins.pending, (state) => {
         state.loading = true
-      })
-      .addCase(fetchCoins.rejected, () => {
-        console.error(`Failed to fetch tokens from CoinGeckoAPI`)
       })
       .addCase(fetchCoins.fulfilled, (state, action) => {
         state.loading = false

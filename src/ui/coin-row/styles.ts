@@ -6,6 +6,18 @@ export const CoinWrapper = styled.div`
   grid-template-columns: 44px 1fr auto auto;
   padding: 15px 0;
   cursor: pointer;
+
+  .right-arrow svg {
+    transition: 0.2s ease-in-out;
+    color: #8c8c8c;
+  }
+
+  &:hover {
+    .right-arrow svg {
+      color: #0185ff;
+      transform: translate(0, 10px);
+    }
+  }
 `
 
 export const CoinIconWrapper = styled.div<{ normalSize?: boolean }>`
@@ -26,7 +38,7 @@ export const Section = styled.div<{ alignRight?: boolean }>`
   justify-content: center;
   align-items: flex-start;
 
-  ${({ alignRight }) => (alignRight ? `align-items: flex-end;` : null)}
+  ${({ alignRight }) => (alignRight ? 'align-items: flex-end;' : null)}
 `
 
 export const MainText = styled.div<{ normalSize?: boolean }>`

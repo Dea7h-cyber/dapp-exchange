@@ -46,4 +46,13 @@ export const ArrowWrapper = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+
+  svg {
+    transition: 0.2s ease-in-out;
+    color: #8c8c8c;
+  }
+
+  &:hover svg {
+    color: #0185ff;
+  }
 `

@@ -5,6 +5,7 @@ export const store = configureStore({
   reducer: {
     exchange: exchangeReducer,
   },
+  devTools: process.env.NODE_ENV !== 'production',
 })
 
 export type AppDispatch = typeof store.dispatch

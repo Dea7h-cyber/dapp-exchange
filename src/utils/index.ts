@@ -1,1 +1,1 @@
-export const getCoinIconPath = (assetName: string) => `/assets/icons/${assetName.toLowerCase()}.svg`
+export const getCoinIconPath = (symbol: string) => process.env.PUBLIC_URL + `/images/coins/${symbol.toLowerCase()}.svg`

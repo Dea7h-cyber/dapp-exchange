@@ -48,7 +48,7 @@ export const ConnectButton = styled.div`
     position: absolute;
     left: 12px;
     top: 12px;
-    background: url('/assets/metamask.svg') no-repeat center center/cover;
+    background: url('/images/metamask.svg') no-repeat center center/cover;
   }
 
   &:hover {

@@ -17,14 +17,12 @@ export const CoinRow: React.FC<Props> = ({ coin, arrow, normalSize, onClick }) =
         <MainText normalSize={normalSize}>{coin.name}</MainText>
         <SubText>{coin.symbol.toUpperCase()}</SubText>
       </Section>
-      {typeof coin?.balanceUSD !== 'undefined' && typeof coin.balance !== 'undefined' && (
-        <Section alignRight>
-          <MainText>${coin.balanceUSD.toLocaleString('en-US', { maximumFractionDigits: 2 })}</MainText>
-          <SubText>{coin.balance.toLocaleString('en-US', { maximumFractionDigits: 8 })}</SubText>
-        </Section>
-      )}
+      <Section alignRight>
+        <MainText>${coin.balanceUSD.toLocaleString('en-US', { maximumFractionDigits: 2 })}</MainText>
+        <SubText>{coin.balance.toLocaleString('en-US', { maximumFractionDigits: 8 })}</SubText>
+      </Section>
       {arrow && (
-        <ArrowWrapper>
+        <ArrowWrapper className='right-arrow'>
           <ArrowIcon />
         </ArrowWrapper>
       )}

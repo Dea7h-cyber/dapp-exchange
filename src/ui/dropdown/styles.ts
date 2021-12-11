@@ -65,6 +65,15 @@ export const SelectWrapper = styled.div`
   align-items: center;
   user-select: none;
   cursor: pointer;
+
+  svg {
+    transition: 0.2s ease-in-out;
+    color: #8c8c8c;
+  }
+
+  &:hover svg {
+    color: #0185ff;
+  }
 `
 
 export const AssetName = styled.div`
@@ -90,6 +99,7 @@ export const DropdownArrow = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #8c8c8c;
 `
 
 // Balance

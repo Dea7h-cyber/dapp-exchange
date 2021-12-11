@@ -1,11 +1,17 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
-import { Exchange } from './exchange'
+import { useEffect } from 'react'
+import { useAppSelector, useAppDispatch } from 'store'
+import { fetchCoins } from 'store/exchange/actions'
+
+import { ConnectWallet } from './ConnectWallet'
+import { ExchangeController } from './ExchangeController'
 
 export const App = () => {
-  return (
-    <Routes>
-      <Route path='/exchange' element={<Exchange />} />
-      <Route path='/' element={<Navigate to='/exchange' replace />} />
-    </Routes>
-  )
+  const dispatch = useAppDispatch()
+  const accountAddresses = useAppSelector((state) => state.exchange.account.addresses)
+
+  useEffect(() => {
+    dispatch(fetchCoins())
+  }, [dispatch])
+
+  return !accountAddresses ? <ConnectWallet /> : <ExchangeController />
 }

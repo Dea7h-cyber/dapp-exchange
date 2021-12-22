@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/images/metamask.svg" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="description" content="Decentralised Crypto Exchange" />
+    <title>DAPP - Crypto Exchange</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script type="text/javascript">
+      const setRealVH = () => document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`)
+      window.addEventListener('resize', () => setRealVH())
+      setRealVH()
+    </script>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+  koy_proxy:
+    container_name: koy_proxy
+    build:
+      context: proxy/docker
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    restart: always
+    depends_on:
+      - koy_exchange
+  koy_exchange:
+    container_name: koy_exchange
+    build:
+      context: exchange/docker
+      dockerfile: Dockerfile
+    restart: always

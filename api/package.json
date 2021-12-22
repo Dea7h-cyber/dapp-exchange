@@ -1,0 +1,38 @@
+{
+  "name": "app.koy.api",
+  "description": "Koy app API - Crypto Exchange",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": "Dea7h",
+  "main": "./build/app.js",
+  "scripts": {
+    "start": "ENV=production node .",
+    "dev": "nodemon -r tsconfig-paths/register ./src/app.ts",
+    "swagger": "nodemon --watch ./openapi.yaml ./src/swagger.ts",
+    "build": "rm -rf ./build && tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./build"
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "helmet": "^4.6.0",
+    "node-cron": "^3.0.0",
+    "socket.io": "^4.4.0",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.0",
+    "@types/node-cron": "^3.0.0",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.4.0",
+    "tsconfig-paths": "^3.12.0",
+    "tscpaths": "^0.0.9",
+    "typescript": "^4.5.4"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
